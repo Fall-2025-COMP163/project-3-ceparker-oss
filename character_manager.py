@@ -2,7 +2,7 @@
 COMP 163 - Project 3: Quest Chronicles
 Character Manager Module - Starter Code
 
-Name: [Your Name Here]
+Name: Chase Parker
 
 AI Usage: [Document any AI assistance used]
 
@@ -47,6 +47,43 @@ def create_character(name, character_class):
     # - inventory=[], active_quests=[], completed_quests=[]
     
     # Raise InvalidCharacterClassError if class not in valid list
+    level=1
+    experience=0
+    gold=100
+    inventory=[]
+    active_quests=[]
+    completed_quests=[]
+    if character_class=="Warrior":
+        health=120
+        strength=15
+        magic=5
+    elif character_class=="Mage":
+        health=80
+        strength=8
+        magic=20
+    elif character_class=="Rogue":
+        health=90
+        strength=12
+        magic=10
+    elif character_class=="Cleric":
+        health=100
+        strength=10
+        magic=15
+    else:
+        raise InvalidCharacterClassError
+    my_dict={"name":name,
+            "class":character_class,
+            "level":level,
+            "health":health,
+            "max_health":health,
+            "strength":strength,
+            "magic":magic,
+            "experience":experience,
+            "gold":gold,
+            "inventory":inventory,
+            "active_quests":active_quests,
+            "completed_quests":completed_quests}
+    return my_dict
     pass
 
 def save_character(character, save_directory="data/save_games"):
@@ -76,6 +113,28 @@ def save_character(character, save_directory="data/save_games"):
     # Create save_directory if it doesn't exist
     # Handle any file I/O errors appropriately
     # Lists should be saved as comma-separated values
+    #Possibly error in error placement
+    if "/" in save_directory and not os.path.exists(save_directory):
+        raise IOError
+    with open(save_directory,"w") as file:
+        file.write(f"NAME: {character['name']}\n")
+        file.write(f"CLASS: {character['class']}\n")
+        file.write(f"LEVEL: {character['level']}\n")
+        file.write(f"HEALTH: {character['health']}\n")
+        file.write(f"MAX_HEALTH: {character['max_health']}\n")
+        file.write(f"STRENGTH: {character['strength']}\n")
+        file.write(f"MAGIC: {character['magic']}\n")
+        file.write(f"EXPERIENCE: {character['experience']}\n")
+        file.write(f"GOLD: {character['gold']}\n")
+        file.write(f"INVENTORY: {character['inventory']}\n")
+        file.write(f"ACTIVE_QUESTS: {character['active_quests']}\n")
+        file.write(f"COMPLETED_QUESTS: {character['completed_quests']}")
+
+    if os.path.isfile(save_directory):
+        return True
+    #Possibly error in error placement
+    else:
+        raise PermissionError
     pass
 
 def load_character(character_name, save_directory="data/save_games"):
@@ -97,6 +156,43 @@ def load_character(character_name, save_directory="data/save_games"):
     # Try to read file → SaveFileCorruptedError
     # Validate data format → InvalidSaveDataError
     # Parse comma-separated lists back into Python lists
+    if not os.path.isfile(save_directory):
+        return None
+    with open(save_directory,'r') as file:
+        chr_dict={}
+        file_read=file.readlines()
+        for i in file_read:
+            t=i.split(":")
+            key=t[0]
+            val=t[1].strip()
+
+            if key=="name":
+                chr_dict["name"]=val
+            elif key=="class":
+                chr_dict["class"]=val
+            elif key=="level":
+                chr_dict["level"]=int(val)
+            elif key=="health":
+                chr_dict["health"]=int(val)
+            elif key=="max_health":
+                chr_dict["max_health"]=int(val)    
+            elif key=="strength":
+                chr_dict["strength"]=int(val)
+            elif key=="magic":
+                chr_dict["magic"]=int(val) 
+            elif key=="experience":
+                chr_dict["experience"]=int(val)
+            elif key=="gold":
+                chr_dict["gold"]=int(val)
+            elif key=="inventory":
+                chr_dict["inventory"]=int(val)
+            elif key=="active_quests":
+                chr_dict["active_quests"]=int(val)
+            elif key=="completed_quests":
+                chr_dict["completed_quests"]=int(val)
+            
+        return chr_dict
+
     pass
 
 def list_saved_characters(save_directory="data/save_games"):
@@ -224,9 +320,10 @@ if __name__ == "__main__":
     
     # Test character creation
     # try:
-    #     char = create_character("TestHero", "Warrior")
-    #     print(f"Created: {char['name']} the {char['class']}")
-    #     print(f"Stats: HP={char['health']}, STR={char['strength']}, MAG={char['magic']}")
+    char = create_character("TestHero", "Warrior")
+    print(char["name"])
+    print(f"Created: {char['name']} the {char['class']}")
+    print(f"Stats: HP={char['health']}, STR={char['strength']}, MAG={char['magic']}")
     # except InvalidCharacterClassError as e:
     #     print(f"Invalid class: {e}")
     
