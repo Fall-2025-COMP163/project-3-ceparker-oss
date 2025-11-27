@@ -34,6 +34,27 @@ def create_enemy(enemy_type):
     """
     # TODO: Implement enemy creation
     # Return dictionary with: name, health, max_health, strength, magic, xp_reward, gold_reward
+    if enemy_type=="goblin":
+        health=50
+        strength=8
+        magic=2
+        xp_reward=25
+        gold_reward=10
+        return enemy_type, health, health, strength, magic, xp_reward, gold_reward
+    elif enemy_type=="orc":
+        health=80
+        strength=12
+        magic=5
+        xp_reward=50
+        gold_reward=25
+        return enemy_type, health, health, strength, magic, xp_reward, gold_reward
+    elif enemy_type=="dragon":
+        health=200
+        strength=25
+        magic=15
+        xp_reward=200
+        gold_reward=100
+        return enemy_type, health, health, strength, magic, xp_reward, gold_reward
     pass
 
 def get_random_enemy_for_level(character_level):
@@ -49,6 +70,12 @@ def get_random_enemy_for_level(character_level):
     # TODO: Implement level-appropriate enemy selection
     # Use if/elif/else to select enemy type
     # Call create_enemy with appropriate type
+    if character_level<=2:
+        create_enemy("goblin")
+    elif character_level<=5:
+        create_enemy("orc")
+    else:
+        create_enemy("dragon")
     pass
 
 # ============================================================================
@@ -68,6 +95,8 @@ class SimpleBattle:
         # Store character and enemy
         # Set combat_active flag
         # Initialize turn counter
+        self.character=character
+        self.enemy=enemy
         pass
     
     def start_battle(self):
