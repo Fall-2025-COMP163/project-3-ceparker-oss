@@ -2,7 +2,7 @@
 COMP 163 - Project 3: Quest Chronicles
 Combat System Module - Starter Code
 
-Name: [Your Name Here]
+Name: Chase Parker
 
 AI Usage: [Document any AI assistance used]
 
@@ -34,28 +34,38 @@ def create_enemy(enemy_type):
     """
     # TODO: Implement enemy creation
     # Return dictionary with: name, health, max_health, strength, magic, xp_reward, gold_reward
+    my_dict={}
     if enemy_type=="goblin":
         health=50
         strength=8
         magic=2
         xp_reward=25
         gold_reward=10
-        return enemy_type, health, health, strength, magic, xp_reward, gold_reward
+        
     elif enemy_type=="orc":
         health=80
         strength=12
         magic=5
         xp_reward=50
         gold_reward=25
-        return enemy_type, health, health, strength, magic, xp_reward, gold_reward
+        
     elif enemy_type=="dragon":
         health=200
         strength=25
         magic=15
         xp_reward=200
         gold_reward=100
-        return enemy_type, health, health, strength, magic, xp_reward, gold_reward
-    pass
+        
+    # Return dictionary with: name, health, max_health, strength, magic, xp_reward, gold_reward
+    my_dict={"enemy_type":enemy_type, 
+            "health":health,
+            "Max_health":health, 
+            "Strangth":strength, 
+            "Magic":magic, 
+            "xp_reward":xp_reward, 
+            "gold_reward":gold_reward}
+    return  my_dict            
+        
 
 def get_random_enemy_for_level(character_level):
     """
@@ -97,6 +107,8 @@ class SimpleBattle:
         # Initialize turn counter
         self.character=character
         self.enemy=enemy
+        self.turn=1
+        self.combat_active=True
         pass
     
     def start_battle(self):
@@ -108,11 +120,16 @@ class SimpleBattle:
         
         Raises: CharacterDeadError if character is already dead
         """
+        if self.character["health"]==0:
+            raise  CharacterDeadError("CharacterDeadError")
+        #while self.character["health"]!=0:
+
         # TODO: Implement battle loop
         # Check character isn't dead
         # Loop until someone dies
         # Award XP and gold if player wins
-        pass
+
+        
     
     def player_turn(self):
         """
@@ -130,7 +147,8 @@ class SimpleBattle:
         # Display options
         # Get player choice
         # Execute chosen action
-        pass
+        
+
     
     def enemy_turn(self):
         """
