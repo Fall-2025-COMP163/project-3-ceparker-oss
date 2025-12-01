@@ -60,19 +60,19 @@ def load_quests(filename="data/quests.txt"):
                 key = t[0].strip()
                 val = t[1].strip()
                 if key == "QUEST_ID":
-                    current["QUEST_ID"] = val
+                    current["quest_id"] = val
                 elif key == "TITLE":
-                    current["TITLE"] = val
+                    current["title"] = val
                 elif key == "DESCRIPTION":
-                    current["DESCRIPTION"] = val
+                    current["description"] = val
                 elif key == "REWARD_XP":
-                    current["REWARD_XP"] = int(val)
+                    current["reward_xp"] = int(val)
                 elif key == "REWARD_GOLD":
-                    current["REWARD_GOLD"] = int(val)
+                    current["reward_gold"] = int(val)
                 elif key == "REQUIRED_LEVEL":
-                    current["REQUIRED_LEVEL"] = int(val)
+                    current["required_level"] = int(val)
                 elif key == "PREREQUISITE":
-                    current["PREREQUISITE"] = val
+                    current["prerequisite"] = val
         if "QUEST_ID" in current:
             quests[current["QUEST_ID"]] = current
 
