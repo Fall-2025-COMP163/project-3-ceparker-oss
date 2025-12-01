@@ -167,12 +167,13 @@ def get_available_quests(character, quest_data_dict):
     #AI help to restructure 
     avalable_list=[]
     for id,quest in quest_data_dict.items():
+        
         if character["level"]>= quest["required_level"]:
             if quest["prerequisite"]!="NONE":
                 raise QuestRequirementsNotMetError("Quest Requirements Not Met")
             if quest["quest_id"] not in character["completed_quests"]: 
                     if quest["quest_id"] not in character["active_quests"]:
-                        avalable_list.append(quest[quest])
+                        avalable_list.append(quest)
     return avalable_list
     
 
