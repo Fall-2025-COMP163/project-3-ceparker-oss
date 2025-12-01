@@ -5,10 +5,10 @@ Character Manager Module - Starter Code
 Name: Chase Parker
 
 AI Usage: [Document any AI assistance used]
-USED IT TO FIX save_character --> delete chaarcter, mainly to bette rundetsatnd directories and os
+USED IT TO FIX save_character --> delete chaarcter, mainly to better undetsatnd directories and os
 This module handles character creation, loading, and saving.
 """
-
+#imported os and custom arguments
 import os
 from custom_exceptions import (
     InvalidCharacterClassError,
@@ -21,7 +21,8 @@ from custom_exceptions import (
 # ============================================================================
 # CHARACTER MANAGEMENT FUNCTIONS
 # ============================================================================
-
+#Creates(and returns) the starting default aspects your created character is given based on your class
+#EX: a warrior gets health of 120 and everyone gets the same gld
 def create_character(name, character_class):
     """
     Create a new character with stats based on class
@@ -85,7 +86,8 @@ def create_character(name, character_class):
             "completed_quests":completed_quests}
     return my_dict
     
-
+#Using file methods we write these aspects in a new file, by opening or creating a new file
+#the is then written inside of with these aspects 
 def save_character(character, save_directory="data/save_games"):
     """
     Save character to file
@@ -142,7 +144,8 @@ def save_character(character, save_directory="data/save_games"):
     else:
         raise PermissionError("Permission Error")
     
-
+#This will load the stats from your file with a new dictionary being created to display these
+#stats from the saved file
 def load_character(character_name, save_directory="data/save_games"):
     """
     Load character from save file
@@ -204,7 +207,8 @@ def load_character(character_name, save_directory="data/save_games"):
         return chr_dict
     except:
         raise SaveFileCorruptedError("Save File Corrupted")
-
+#This will grab the the names for each saved file, ensuring there, accesing the directory
+#to grab the file name and only taking the name from it
 def list_saved_characters(save_directory="data/save_games"):
     """
     Get list of all saved character names
@@ -226,7 +230,8 @@ def list_saved_characters(save_directory="data/save_games"):
 
     return my_list
     
-
+#This will simply delete the character from the os
+#Taught in 8.3 if wondering
 def delete_character(character_name, save_directory="data/save_games"):
     """
     Delete a character's save file
@@ -236,7 +241,7 @@ def delete_character(character_name, save_directory="data/save_games"):
     """
     # TODO: Implement character deletion
     # Verify file exists before attempting deletion
-
+    
     filename = f"{character_name}_save.txt"
     filepath = os.path.join(save_directory, filename)
     if not os.path.isfile(filepath):
@@ -247,12 +252,13 @@ def delete_character(character_name, save_directory="data/save_games"):
     except:
         raise
     
-    pass
+    
 
 # ============================================================================
 # CHARACTER OPERATIONS
 # ============================================================================
-
+#If leveled up, the fucntion will check if your dead and then after its confirmed your not
+#Your stats from your character_creation fucntion will be amped.
 def gain_experience(character, xp_amount):
     """
     Add experience to character and handle level ups
@@ -282,8 +288,9 @@ def gain_experience(character, xp_amount):
         character["strength"] += 2
         character["magic"] += 2
         character["health"] = character["max_health"]
-    pass
-
+    
+#gold will be added to your amount after ensuring that its greater than zero,after 
+# it will add your reward and then return how much gold you have.
 def add_gold(character, amount):
     """
     Add gold to character's inventory
@@ -305,7 +312,7 @@ def add_gold(character, amount):
         character["gold"]=char
         return char
     
-
+#This will ensure your charatcers healed after it checks you dont exceed your max_health
 def heal_character(character, amount):
     """
     Heal character by specified amount
@@ -323,7 +330,7 @@ def heal_character(character, amount):
             character["health"]=amt
             return amt
     
-
+#checks if your characters dead by lookign if your health==0
 def is_character_dead(character):
     """
     Check if character's health is 0 or below
@@ -336,7 +343,7 @@ def is_character_dead(character):
     else:
         return False
     
-
+#if your dead, you can revive him with 50% health off
 def revive_character(character):
     """
     Revive a dead character with 50% health
@@ -354,7 +361,8 @@ def revive_character(character):
 # ============================================================================
 # VALIDATION
 # ============================================================================
-
+#Validates that your charcters matches the "required feilds" and match they type of feild they cover
+#raising a specific error if not
 def validate_character_data(character):
     """
     Validate that character dictionary has all required fields
