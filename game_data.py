@@ -2,9 +2,10 @@
 COMP 163 - Project 3: Quest Chronicles
 Game Data Module - Starter Code
 
-Name: [Your Name Here]
+Name: Chase Parker
 
-AI Usage: [Document any AI assistance used]
+AI Usage: I used ai to help remidn me on how to validate and structure the various dictionaries, 
+as I had mutliple errors due to "Key_error" related issues
 
 This module handles loading and validating game data from text files.
 """

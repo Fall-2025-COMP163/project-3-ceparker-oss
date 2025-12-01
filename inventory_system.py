@@ -4,7 +4,8 @@ Inventory System Module - Starter Code
 
 Name: Chase Parker
 
-AI Usage: [Document any AI assistance used]
+AI Usage: Needed help on how to count on display_inventory with touch up issues based in adding items,
+and checkign items
 
 This module handles inventory management, item usage, and equipment.
 """
@@ -22,7 +23,7 @@ MAX_INVENTORY_SIZE = 20
 # ============================================================================
 # INVENTORY MANAGEMENT
 # ============================================================================
-
+#this will add an items to your charcters inventory, as inventory is an entire list for your character
 def add_item_to_inventory(character, item_id):
     """
     Add an item to character's inventory
@@ -44,7 +45,7 @@ def add_item_to_inventory(character, item_id):
     
     return True
     
-
+#this will remove an items to your charcters inventory, as once again, the inventory is an entire list for your character
 def remove_item_from_inventory(character, item_id):
     """
     Remove an item from character's inventory
@@ -65,7 +66,7 @@ def remove_item_from_inventory(character, item_id):
     else:
         raise ItemNotFoundError
     
- 
+#this will check your inventory and see if the given item_id is the the chacrert inventory list
 def has_item(character, item_id):
     """
     Check if character has a specific item
@@ -78,7 +79,7 @@ def has_item(character, item_id):
     else:
         return False
     
-
+#this uses your charxcter inventory and check how much of item_id you have
 def count_item(character, item_id):
     """
     Count how many of a specific item the character has
@@ -89,7 +90,7 @@ def count_item(character, item_id):
     # Use list.count() method
     print(character["inventory"].count(item_id))
     pass
-
+#based on max inventory you subtract it from the length of your inventory list
 def get_inventory_space_remaining(character):
     """
     Calculate how many more items can fit in inventory
@@ -99,7 +100,7 @@ def get_inventory_space_remaining(character):
     # TODO: Implement space calculation
     return MAX_INVENTORY_SIZE-len(character["inventory"])
     
-
+#goes throught even list items and remvoes them one by one
 def clear_inventory(character):
     """
     Remove all items from inventory
@@ -119,7 +120,7 @@ def clear_inventory(character):
 # ============================================================================
 # ITEM USAGE
 # ============================================================================
-
+#checks if items in your inventory then based on if its consumable, youll be able to use it
 def use_item(character, item_id, item_data):
     """
     Use a consumable item from inventory
@@ -156,7 +157,7 @@ def use_item(character, item_id, item_data):
     else:
         raise ItemNotFoundError("Item not found")
     
-
+#based on if your objects a weapon, you can equip it
 def equip_weapon(character, item_id, item_data):
     """
     Equip a weapon
@@ -206,6 +207,7 @@ def equip_weapon(character, item_id, item_data):
     
     else:
         raise ItemNotFoundError("item not in inventory")
+#based on if your objects a armor, you can equip it
 def equip_armor(character, item_id, item_data):
     """
     Equip armor
@@ -250,7 +252,7 @@ def equip_armor(character, item_id, item_data):
     
     else:
         raise ItemNotFoundError("item not in inventory")
-
+#based on if your objects a weapon and you wan to replace it, you can unequip it
 def unequip_weapon(character):
     """
     Remove equipped weapon and return it to inventory
@@ -271,7 +273,7 @@ def unequip_weapon(character):
     del character["weapon"]
     character["inventory"].append(weapon_id)
     return weapon_id
-
+#based on if your objects a armor and you wan to replace it, you can unequip it
 def unequip_armor(character):
     """
     Remove equipped armor and return it to inventory
@@ -294,7 +296,8 @@ def unequip_armor(character):
 # ============================================================================
 # SHOP SYSTEM
 # ============================================================================
-
+#if you have space if your inventory and you have enought gold,
+#your gold will be reduced as its added to your inventory
 def purchase_item(character, item_id, item_data):
     """
     Purchase an item from a shop
@@ -324,7 +327,7 @@ def purchase_item(character, item_id, item_data):
     return True
 
     
-
+#If you need to replace an items in room for more, you get half your gold back to resell your item
 def sell_item(character, item_id, item_data):
     """
     Sell an item for half its purchase cost
@@ -355,7 +358,7 @@ def sell_item(character, item_id, item_data):
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
-
+#Will split your stats to better dispaly them 
 def parse_item_effect(effect_string):
     """
     Parse item effect string into stat name and value
@@ -374,7 +377,7 @@ def parse_item_effect(effect_string):
     stat_num=int(effect_split[1].strip())
     return stat_name,stat_num
     pass
-
+#based on the effect given, it will be added to your charcters stats ex:character["health"]
 def apply_stat_effect(character, stat_name, value):
     """
     Apply a stat modification to character
@@ -396,6 +399,7 @@ def apply_stat_effect(character, stat_name, value):
         character["strength"]+=value
     elif stat_name=="magic":
         character["magic"]+=value
+#Will dispay eventying in your inventory list and counts how much in each inventory
 def display_inventory(character, item_data_dict):
     """
     Display character's inventory in formatted way
