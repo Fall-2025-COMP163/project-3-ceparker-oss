@@ -59,7 +59,7 @@ def create_enemy(enemy_type):
         raise InvalidTargetError("Invalid Target")
         
     # Return dictionary with: name, health, max_health, strength, magic, xp_reward, gold_reward
-    my_dict={"name":enemy_type, 
+    my_dict={"name":enemy_type.capitalize(), 
             "health":health,
             "max_health":health, 
             "strength":strength, 
