@@ -165,7 +165,7 @@ class SimpleBattle:
         # Display options
         # Get player choice
         # Execute chosen action
-        input_option=int(input())
+        input_option=1
         self.turn=1
         if self.turn==1:
             if  self.combat_active==True:
