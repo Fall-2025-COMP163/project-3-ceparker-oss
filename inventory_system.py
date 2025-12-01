@@ -192,7 +192,7 @@ def equip_weapon(character, item_id, item_data):
             if is_equip==False:
                 #Possible error here (welcome back)
                 apply_stat_effect(character, "strength", value)
-                character["weapon"]=item_id
+                character["equipped_weapon"]=item_id
                 character["inventory"].remove(item_id)
                 is_equip=True
                 return f"Equipped The {item_id}"  
@@ -263,7 +263,7 @@ def unequip_weapon(character):
     # Remove stat bonuses
     # Add weapon back to inventory
     # Clear equipped_weapon from character
-    if "weapon" not in character:
+    if "equipped_weapon" not in character:
         return None
     if len(character["inventory"])>=MAX_INVENTORY_SIZE:
         raise InventoryFullError
