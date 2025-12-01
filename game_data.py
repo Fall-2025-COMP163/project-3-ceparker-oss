@@ -50,8 +50,8 @@ def load_quests(filename="data/quests.txt"):
             for line in file:
                 line = line.strip()
                 if line == "":
-                    if "QUEST_ID" in current:
-                        quests[current["QUEST_ID"]] = current
+                    if "quest_id" in current:
+                        quests[current["quest_id"]] = current
                     current = {}
                     continue
                 t = line.split(":", 1)
@@ -73,8 +73,8 @@ def load_quests(filename="data/quests.txt"):
                     current["required_level"] = int(val)
                 elif key == "PREREQUISITE":
                     current["prerequisite"] = val
-        if "QUEST_ID" in current:
-            quests[current["QUEST_ID"]] = current
+        if "quest_id" in current:
+            quests[current["quest_id"]] = current
 
         return quests
 
