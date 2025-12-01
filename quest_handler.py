@@ -54,7 +54,8 @@ def accept_quest(character, quest_id, quest_data_dict):
 
         if character["level"]>= quest_data_dict[quest_id]["required_level"]:
                 if quest_data_dict[quest_id]["prerequisite"]!="NONE":
-                    raise QuestRequirementsNotMetError("Quest Requirements Not Met")
+                    if quest_data_dict[quest_id]["prerequisite"] not in character["completed_quests"]:
+                        raise QuestRequirementsNotMetError("Quest Requirements Not Met")
                 if quest_id not in character["completed_quests"]: 
                     if quest_id not in character["active_quests"]:
                         character["active_quests"].append(quest_id)
