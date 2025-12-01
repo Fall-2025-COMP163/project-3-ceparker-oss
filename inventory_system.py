@@ -417,7 +417,7 @@ def display_inventory(character, item_data_dict):
             count_dict[i]=1
     for i in count_dict:
         if i in item_data_dict:
-            print(f"{item_data_dict["name"]}{item_data_dict["type"]}{count_dict[i]}")
+            print(f'{item_data_dict[i]["name"]} {item_data_dict[i]["type"]} {count_dict[i]}')
         else:
             print("No Dict")
     
@@ -454,6 +454,7 @@ if __name__ == "__main__":
     try:
           result = use_item(test_char, "health_potion", test_item)
           print(result)
+          
     except ItemNotFoundError:
          print("Item not found")
 

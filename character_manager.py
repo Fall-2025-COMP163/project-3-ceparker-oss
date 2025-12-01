@@ -84,7 +84,7 @@ def create_character(name, character_class):
             "active_quests":active_quests,
             "completed_quests":completed_quests}
     return my_dict
-    pass
+    
 
 def save_character(character, save_directory="data/save_games"):
     """
@@ -164,38 +164,46 @@ def load_character(character_name, save_directory="data/save_games"):
     # Parse comma-separated lists back into Python lists
     filename = f"{character_name}_save.txt"
     filepath = os.path.join(save_directory, filename)
-    with open(filepath,'r') as file:
-        chr_dict={}
-        file_read=file.readlines()
-        for i in file_read:
-            t=i.split(":")
-            key=t[0]
-            val=t[1].strip()
-            if key=="NAME":
-               chr_dict['name']=val
-            elif key=="CLASS":
-               chr_dict["class"]=val
-            elif key=="LEVEL":
-               chr_dict["level"]=int(val)
-            elif key=="HEALTH":
-               chr_dict["health"]=int(val)
-            elif key=="MAX_HEALTH":
-               chr_dict["max_health"]=int(val)   
-            elif key=="STRENGTH":
-               chr_dict["strength"]=int(val)
-            elif key=="MAGIC":
-               chr_dict["magic"]=int(val)
-            elif key=="EXPERIENCE":
-               chr_dict["experience"]=int(val)
-            elif key=="GOLD":
-               chr_dict["gold"]=int(val)
-            elif key=="INVENTORY":
-               chr_dict["inventory"]=val
-            elif key=="ACTIVE_QUESTS":
-               chr_dict["active_quests"]=val
-            elif key=="COMPLETED_QUESTS":
-               chr_dict["completed_quests"]=val
-        return chr_dict 
+    if not os.path.isfile(filepath):
+        raise CharacterNotFoundError("CharacterNotFoundError")
+    
+    try:
+        with open(filepath,'r') as file:
+            chr_dict={}
+            file_read=file.readlines()
+            
+            for i in file_read:
+                t=i.split(":")
+                key=t[0]
+                val=t[1].strip()
+                if key=="NAME":
+                    chr_dict['name']=val
+                elif key=="CLASS":
+                    chr_dict["class"]=val
+                elif key=="LEVEL":
+                    chr_dict["level"]=int(val)
+                elif key=="HEALTH":
+                    chr_dict["health"]=int(val)
+                elif key=="MAX_HEALTH":
+                    chr_dict["max_health"]=int(val)   
+                elif key=="STRENGTH":
+                    chr_dict["strength"]=int(val)
+                elif key=="MAGIC":
+                    chr_dict["magic"]=int(val)
+                elif key=="EXPERIENCE":
+                    chr_dict["experience"]=int(val)
+                elif key=="GOLD":
+                    chr_dict["gold"]=int(val)
+                elif key=="INVENTORY":
+                    chr_dict["inventory"]=val.split(",")
+                elif key=="ACTIVE_QUESTS":
+                    chr_dict["active_quests"]=val.split(",")
+                elif key=="COMPLETED_QUESTS":
+                    chr_dict["completed_quests"]=val.split(",")
+        validate_character_data(chr_dict)
+        return chr_dict
+    except:
+        raise SaveFileCorruptedError("Save File Corrupted")
 
 def list_saved_characters(save_directory="data/save_games"):
     """
@@ -217,7 +225,7 @@ def list_saved_characters(save_directory="data/save_games"):
                     my_list.append(char_name)
 
     return my_list
-    pass
+    
 
 def delete_character(character_name, save_directory="data/save_games"):
     """
@@ -376,7 +384,7 @@ def validate_character_data(character):
             raise InvalidSaveDataError("InvalidSaveDataError for numeric_feild")
     list_feild=["inventory", "active_quests", "completed_quests"]
     for feild in list_feild:
-        if not isinstance(character[field],list):
+        if not isinstance(character[feild],list):
             raise InvalidSaveDataError("InvalidSaveDataError for list_feild")
     return True
 
