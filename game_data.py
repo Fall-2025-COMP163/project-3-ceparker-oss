@@ -132,7 +132,7 @@ def load_items(filename="data/items.txt"):
                 
                         current["effect"] = {parts[0].strip(): int(parts[1].strip())} 
                     elif key == "COST":
-                        current["cosr"] = int(val)
+                        current["cost"] = int(val)
                     elif key == "DESCRIPTION":
                         current["description"] = val
 
