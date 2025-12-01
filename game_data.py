@@ -223,6 +223,7 @@ def validate_item_data(item_dict):
         int(stat_value)
     except:
         raise InvalidDataFormatError("Must be numeric")
+    return True
 def create_default_data_files():
     """
     Create default data files if they don't exist
