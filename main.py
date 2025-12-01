@@ -2,9 +2,9 @@
 COMP 163 - Project 3: Quest Chronicles
 Main Game Module - Starter Code
 
-Name: [Your Name Here]
+Name: Chase Parker
 
-AI Usage: [Document any AI assistance used]
+AI Usage: Used to check errors on line 21 as it reocmmended me to import it this way
 
 This is the main game file that ties all modules together.
 Demonstrates module integration and complete game flow.
@@ -32,7 +32,7 @@ game_running = False
 # ============================================================================
 # MAIN MENU
 # ============================================================================
-
+#gives the the three primary options to begin your game
 def main_menu():
     """
     Display main menu and get player choice
@@ -53,7 +53,7 @@ def main_menu():
     return input_opt
 
     
-
+#new game is option 1, creating you a new character 
 def new_game():
     """
     Start a new game
@@ -79,7 +79,7 @@ def new_game():
     character_manager.save_character(current_character)
     game_loop()
     pass
-
+#Loads an existing hame and loads an old character
 def load_game():
     """
     Load an existing saved game
@@ -98,14 +98,15 @@ def load_game():
     # Start game loop
     character_manager.load_character(current_character)
     character_manager.list_saved_characters()
+    #explaiend below
     game_loop()
-    #Not done!
+    
     pass
 
 # ============================================================================
 # GAME LOOP
 # ============================================================================
-
+#base don your choice, and the games running you can view differnt things about your character
 def game_loop():
     """
     Main game loop - shows game menu and processes actions
@@ -136,7 +137,7 @@ def game_loop():
             break
         save_game()
     
-
+#asks for your input_opt so "choice" in the fuction above can call differnt actions
 def game_menu():
     """
     Display game menu and get player choice
@@ -157,7 +158,7 @@ def game_menu():
 # ============================================================================
 # GAME ACTIONS
 # ============================================================================
-
+#action 1 will use the imported display_stats to continue
 def view_character_stats():
     """Display character information"""
     global current_character,all_quests
@@ -170,7 +171,7 @@ def view_character_stats():
     quest_handler.display_character_quest_progress(current_character, all_quests)
     #Potential error
     pass
-
+#action 2 will use the imported display_inventory to continue
 def view_inventory():
     """Display and manage inventory"""
     global current_character, all_items
@@ -181,7 +182,8 @@ def view_inventory():
     # Handle exceptions from inventory_system
     print(inventory_system.display_inventory(current_character, all_items))
     
-
+#action 3 will use the imported quest handlers askign for input to check the quest you can acces
+#abandon,accept,etc
 def quest_menu():
     """Quest management menu"""
     global current_character, all_quests
@@ -196,7 +198,7 @@ def quest_menu():
     #   6. Complete Quest (for testing)
     #   7. Back
     # Handle exceptions from quest_handler
-    #Issue
+    
     input_opt=int(input("1. View Active Quests|2. View Available Quests|3. View Completed Quests|4. Accept Quest| 5. Abandon Quest|6. Complete Quest (for testing)| 7. Back"))
     if input_opt==1:
         print(quest_handler.get_active_quests(current_character, all_quests))
@@ -211,7 +213,7 @@ def quest_menu():
     elif input_opt==6:
         print(quest_handler.complete_quest(current_character,"first_quest", all_quests))
     
-        
+# action 4 explore will acces the combat system module and starst a battle base don your class
 def explore():
     """Find and fight random enemies"""
     global current_character
@@ -226,7 +228,7 @@ def explore():
     fight = combat_system.SimpleBattle(current_character, enemy)
     result = fight.start_battle()
     print(result)
-
+#action 5, will acces all items avalabel to buy and will ask if you want to buy an item
 def shop():
     """Shop menu for buying/selling items"""
     global current_character, all_items
@@ -251,7 +253,7 @@ def shop():
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
-
+#will use the charcter_manager to save your current character
 def save_game():
     """Save current game state"""
     global current_character
@@ -261,7 +263,7 @@ def save_game():
     # Handle any file I/O exceptions
     character_manager.save_character(current_character)
     pass
-
+#will load the needed items and quest, and like said, if not found, it create a default set of quest and items
 def load_game_data():
     """Load all quest and item data from files"""
     global all_quests, all_items
@@ -277,7 +279,7 @@ def load_game_data():
     except:
         game_data.create_default_data_files()
     pass
-
+#handles what to do if the charcter dies, as you can choose if you want to revive your charcter at the cost of gold
 def handle_character_death():
     """Handle character death"""
     global current_character, game_running
