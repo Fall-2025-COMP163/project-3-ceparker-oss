@@ -152,7 +152,7 @@ def use_item(character, item_id, item_data):
             character["inventory"].remove(item_id)
             return f"Used The {item_id}"
         else:
-            InvalidItemTypeError("Cannot be used, only equipped")
+            raise InvalidItemTypeError("Cannot be used, only equipped")
     else:
         raise ItemNotFoundError("Item not found")
     
