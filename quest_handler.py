@@ -381,7 +381,7 @@ def validate_quest_prerequisites(quest_data_dict):
         else:
             raise QuestNotFoundError("Quest not found")
     
-
+    return True
 
 # ============================================================================
 # TESTING
