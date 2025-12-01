@@ -110,8 +110,8 @@ def load_items(filename="data/items.txt"):
                 for line in file:
                     line = line.strip()
                     if line == "":
-                        if "ITEM_ID" in current:
-                            items[current["ITEM_ID"]] = current
+                        if "item_id" in current:
+                            items[current["item_id"]] = current
                         current = {}
                         continue
                     t = line.split(":", 1)
@@ -120,26 +120,26 @@ def load_items(filename="data/items.txt"):
                     key = t[0].strip()
                     val = t[1].strip()
                     if key == "ITEM_ID":
-                        current["ITEM_ID"] = val
+                        current["item_id"] = val
                     elif key == "NAME":
-                        current["NAME"] = val
+                        current["name"] = val
                     elif key == "TYPE":
-                        current["TYPE"] = val
+                        current["type"] = val
                     elif key == "EFFECT":
                         parts = val.split(":", 1)
                         if len(parts) != 2:
                             raise InvalidDataFormatError("Invalid EFFECT")
                 
-                        current["EFFECT"] = {parts[0].strip(): int(parts[1].strip())} 
+                        current["effect"] = {parts[0].strip(): int(parts[1].strip())} 
                     elif key == "COST":
-                        current["COST"] = int(val)
+                        current["cosr"] = int(val)
                     elif key == "DESCRIPTION":
-                        current["DESCRIPTION"] = val
+                        current["description"] = val
 
                     else:
                         raise InvalidDataFormatError("Unknown field error")
-            if "ITEM_ID" in current:
-                items[current["ITEM_ID"]] = current
+            if "item_id" in current:
+                items[current["item_id"]] = current
             return items
     except FileNotFoundError:
             raise MissingDataFileError("File not found")
