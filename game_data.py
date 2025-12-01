@@ -19,7 +19,8 @@ from custom_exceptions import (
 # ============================================================================
 # DATA LOADING FUNCTIONS
 # ============================================================================
-
+#This will load the quest file in the data directory striping it of any newlines
+#and then creating a new dictionary with these quest
 def load_quests(filename="data/quests.txt"):
     """
     Load quest data from file
@@ -54,6 +55,7 @@ def load_quests(filename="data/quests.txt"):
                         quests[current["quest_id"]] = current
                     current = {}
                     continue
+                
                 t = line.split(":", 1)
                 if len(t) != 2:
                     raise InvalidDataFormatError("InvalidDataFormatError")
@@ -84,7 +86,8 @@ def load_quests(filename="data/quests.txt"):
         raise
     except Exception:
         raise CorruptedDataError("CorruptedDataError")
-    
+#This will load the items file in the data directory striping it of any newlines
+#and then creating a new dictionary with these items
 def load_items(filename="data/items.txt"):
     """
     Load item data from file
@@ -147,7 +150,7 @@ def load_items(filename="data/items.txt"):
             raise
     except Exception as e:
             raise CorruptedDataError("CorruptedDataError")
-        
+#ensures that the quest loaded, has all mathcing requirments to be loaded in
 def validate_quest_data(quest_dict):
     """
     Validate that quest dictionary has all required fields
@@ -183,6 +186,7 @@ def validate_quest_data(quest_dict):
                 raise InvalidDataFormatError("Invalid number feild")
     
     return True
+#ensures that the items loaded, has all mathcing requirments to be loaded in
 def validate_item_data(item_dict):
     """
     Validate that item dictionary has all required fields
@@ -224,6 +228,7 @@ def validate_item_data(item_dict):
     except:
         raise InvalidDataFormatError("Must be numeric")
     return True
+#if not created, we create our own files just in case the files not found
 def create_default_data_files():
     """
     Create default data files if they don't exist
@@ -262,7 +267,7 @@ def create_default_data_files():
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
-
+#checks for errors and creates another dicitonary with thes quest in place
 def parse_quest_block(lines):
     """
     Parse a block of lines into a quest dictionary
@@ -311,6 +316,7 @@ def parse_quest_block(lines):
             raise InvalidDataFormatError("Invalid numeric value: ")
 
     return quest
+#checks for errors and creates another dicitonary with thes items in place
 def parse_item_block(lines):
     """
     Parse a block of lines into an item dictionary
