@@ -343,9 +343,9 @@ def sell_item(character, item_id, item_data):
     # Remove item from inventory
     # Add gold to character
     if item_id in character["inventory"]:
-        gold_earned=(item_id["cost"]//2)
-        character['gold']+=gold_earned
+        gold_earned=item_data["cost"]//2
         character['inventory'].remove(item_id)
+        character['gold']+=gold_earned
         return gold_earned
     else:
         raise ItemNotFoundError
