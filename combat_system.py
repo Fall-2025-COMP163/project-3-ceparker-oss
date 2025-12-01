@@ -4,7 +4,9 @@ Combat System Module - Starter Code
 
 Name: Chase Parker
 
-AI Usage: [Document any AI assistance used]
+AI Usage: Ai was used to check for errors, along with helping structure SimpleBattle and how to loop
+and properly ensure when it was the player and enemys turn in the game, the main erros were trying to regualte special abilites
+
 
 Handles combat mechanics
 """
@@ -19,7 +21,8 @@ from custom_exceptions import (
 # ============================================================================
 # ENEMY DEFINITIONS
 # ============================================================================
-
+#creates an enemy with its OWN stats with the rewards for defetig them verying based on enemy
+#returning a dictionary based on how much you gained
 def create_enemy(enemy_type):
     """
     Create an enemy based on type
@@ -68,7 +71,7 @@ def create_enemy(enemy_type):
             "gold_reward":gold_reward}
     return  my_dict            
         
-
+#based on your level, your given a random enemy based on it
 def get_random_enemy_for_level(character_level):
     """
     Get an appropriate enemy for character's level
@@ -93,14 +96,14 @@ def get_random_enemy_for_level(character_level):
 # ============================================================================
 # COMBAT SYSTEM
 # ============================================================================
-
+#simple battle class created, expalined in sections
 class SimpleBattle:
     """
     Simple turn-based combat system
     
     Manages combat between character and enemy
     """
-    
+    #creates attributes for your code to follow
     def __init__(self, character, enemy):
         """Initialize battle with character and enemy"""
         # TODO: Implement initialization
@@ -112,7 +115,7 @@ class SimpleBattle:
         self.turn=1
         self.combat_active=True
         pass
-    
+    #starts a battle and loops until you or the enemy wins
     def start_battle(self):
         """
         Start the combat loop
@@ -148,7 +151,7 @@ class SimpleBattle:
         # Award XP and gold if player wins
 
         
-    
+    #displays the actions the player can take during their turn
     def player_turn(self):
         """
         Handle player's turn
@@ -180,7 +183,7 @@ class SimpleBattle:
                    self.attempt_escape()
             else:
                 raise CombatNotActiveError("Combat is not active")
-    
+    #displays the actions the enemy can take during their turn
     def enemy_turn(self):
         """
         Handle enemy's turn - simple AI
@@ -200,6 +203,7 @@ class SimpleBattle:
         
         else:
             raise CombatNotActiveError("Combat is not active")
+    #when hit, the code will caluclate how much damage the defender takes
     def calculate_damage(self, attacker, defender):
         """
         Calculate damage from attack
@@ -217,7 +221,7 @@ class SimpleBattle:
             damage=1
             return int(damage)
         
-    
+    #after calculating, damage is applied
     def apply_damage(self, target, damage):
         """
         Apply damage to a character or enemy
@@ -230,7 +234,8 @@ class SimpleBattle:
             if target["health"] < 0:
                 target["health"] = 0
         
-    
+    #this continously checks to see if the battles over, meaning once a charcter
+    #(player or enemy) dies it retuns a winner
     def check_battle_end(self):
         """
         Check if battle is over
@@ -242,7 +247,7 @@ class SimpleBattle:
             return "enemy"
         if self.enemy["health"]==0:
             return 'player'
-    
+    #this will randomly select if you can escape with > 50 meaning you escaped
     def attempt_escape(self):
         """
         Try to escape from battle
@@ -268,7 +273,8 @@ class SimpleBattle:
 # ============================================================================
 # SPECIAL ABILITIES
 # ============================================================================
-
+#special abilites you can use based on your class 
+# that the player can choose othe rthan a regualr attack in the battle loop
 def use_special_ability(character, enemy):
     """
     Use character's class-specific special ability
@@ -350,7 +356,8 @@ def cleric_heal(character):
 # ============================================================================
 # COMBAT UTILITIES
 # ============================================================================
-
+#Will check to see if your charatcer can fight, menaing your alive 
+# and your combat is not active anymore
 def can_character_fight(character):
     """
     Check if character is in condition to fight
@@ -364,7 +371,7 @@ def can_character_fight(character):
     else:
         return False
     
-
+#allows you to collect your victory rewards from the enemy and retusn your rewards
 def get_victory_rewards(enemy):
     """
     Calculate rewards for defeating enemy
@@ -377,6 +384,7 @@ def get_victory_rewards(enemy):
     vic_dict["gold"]=enemy["gold_reward"]
     vic_dict["xp"]=enemy["xp_reward"]
     return vic_dict
+#This will dispaly your stats for our charcter along with their health,name,max_health,etc
 def display_combat_stats(character, enemy):
     """
     Display current combat status
