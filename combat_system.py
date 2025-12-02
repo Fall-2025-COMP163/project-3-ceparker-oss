@@ -5,7 +5,7 @@ Combat System Module - Starter Code
 Name: Chase Parker
 
 AI Usage: Ai was used to check for errors, along with helping structure SimpleBattle and how to loop
-and properly ensure when it was the player and enemys turn in the game, the main erros were trying to regualte special abilites
+and properly ensure when it was the player and enemys turn in the game, the main errors were trying to regualte special abilites
 
 
 Handles combat mechanics

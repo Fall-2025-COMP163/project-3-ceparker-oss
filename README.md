@@ -149,3 +149,71 @@ Test files are provided for your learning but are protected. Modifying test file
 - Academic integrity investigation
 
 You can view tests to understand requirements, but any modifications will be automatically detected.
+Module Architecture
+
+Game_data-
+Loads in quest data and items from their respective files to display to the user
+Character_manager-
+Creates your character and you choose a class, giving you options to save it,load it, and options based on if your character dies, your character's achievements, etc.
+Inventory_system-
+This will check your character's inventory,with options to use items within it, equip or unequip them, add them, remove them, all ensuring that it does not exceed its maximum of 20 items.
+
+Quest_handler-
+This will allow you to access different given quests, allowing you to accept them, drop them, see requirements for the quest, which will add to “completed_quest” if completed or “active_quest” if currently achieved, all being changed depending on how you complete these quests.
+Combat_system-
+This creates an enemy and puts you through a battle loop within the module, with you having special abilities based on your class, this loop will end once you or the enemy dies.
+main-
+This combines all functions to create a full menu of options, compiling to start or load a new file with characters, implementing every module based on your choices.
+
+Except Strategy: 
+Using try, any possible errors are caught, aligned with raise being used based on potential errors. 
+
+EX:
+t=line.split(“:”,1)
+	If len(t) !=2:
+		Raise InvalidDataFormatError(“Invalid Format”)
+Checks that lines in the file in game_data has two parts when split 
+These exceptions are used when a citation regarding the errors, like how this one is used when a invalid file formats used
+
+Many other exceptions follow this with CombatNotActivEerror taking place if the corresponding action occurs where “self.combat” is not active in combat_system
+
+Design Choices: 
+I kept things simple, as I completed this based on the structure of the last two projects, with many of the personal choices coming from combat_system as I referred back to these projects to give the game an announcer-like presence when battling.
+
+AI(chat.gpt): 
+combat_system-AI Usage: Ai was used to check for errors, along with helping structure SimpleBattle and how to loop
+and properly ensure when it was the player and enemy's turn in the game, the main errors were trying to regulate special abilities
+
+character_manager-AI Usage: [Document any AI assistance used]
+USED IT TO FIX save_character --> delete character, mainly to better understand directories and os
+This module handles character creation, loading, and saving.
+
+game_data-AI Usage: I used ai to help remind me on how to validate and structure the various dictionaries,
+as I had multiple errors due to "Key_error" related issues
+
+
+
+Inventory_system-AI Usage: Needed help on how to count on display_inventory with touch up issues based in adding items,
+and checking items
+
+
+
+main-AI Usage: Used to check errors on line 21 as it recommended me to import it this way
+
+quest_handler-AI Usage: This was use for clean up purposes, along with checking for errors in getting the types of quest
+Ai also help me again, as it also gave me a format for these types of functions
+MAIN HELP: Prerequisite, as I needed to be informed how to gain a list backwards
+This module handles quest management, dependencies, and completion.
+
+How To play:
+Hello Traveller! Like the rest this game is simple as when you go to the “main” file you're presented with the options: New Game,Load Game, and Exit.
+
+This will present you with different ways to explore as it you select the following:
+
+New_Game-
+A new game will start with you creating a new character and a battle commencing based on your level, choose your name and class and battle forth
+Load_game-
+You already have a file? Great! You can commence there! And throughout commence your battles
+
+Exit-
+Boo! you simply just left, but at least you get a fair goodbye

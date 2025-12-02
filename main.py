@@ -4,7 +4,7 @@ Main Game Module - Starter Code
 
 Name: Chase Parker
 
-AI Usage: Used to check errors on line 21 as it reocmmended me to import it this way
+AI Usage: Used to check errors on line 21 as it recommended me to import it this way
 
 This is the main game file that ties all modules together.
 Demonstrates module integration and complete game flow.

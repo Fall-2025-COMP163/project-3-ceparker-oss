@@ -4,8 +4,8 @@ Game Data Module - Starter Code
 
 Name: Chase Parker
 
-AI Usage: I used ai to help remidn me on how to validate and structure the various dictionaries, 
-as I had mutliple errors due to "Key_error" related issues
+AI Usage: I used ai to help remind me on how to validate and structure the various dictionaries, 
+as I had multiple errors due to "Key_error" related issues
 
 This module handles loading and validating game data from text files.
 """

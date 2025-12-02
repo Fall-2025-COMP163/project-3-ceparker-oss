@@ -5,7 +5,7 @@ Inventory System Module - Starter Code
 Name: Chase Parker
 
 AI Usage: Needed help on how to count on display_inventory with touch up issues based in adding items,
-and checkign items
+and checking items
 
 This module handles inventory management, item usage, and equipment.
 """
